@@ -2,18 +2,13 @@
 @section('content')
     @push('js')
         <script>
-            $(function () {
+            $(document).ready(function(){
                 // 6 create an instance when the DOM is ready
                 $('#jstree').jstree({ 'core' : {
                         "themes" : {
                             "variant" : "large"
                         },
-                        'data' : [
-                            { "id" : "1", "parent" : "#", "text" : "Simple root node" },
-                            { "id" : "2", "parent" : "1", "text" : "Root node 2" },
-                            { "id" : "3", "parent" : "2", "text" : "Child 1" },
-                            { "id" : "4", "parent" : "2", "text" : "Child 2" },
-                        ]
+                        'data' :{!! load_departments(old('parent_id'))!!}
                     },
 
                     "checkbox" : {
@@ -24,11 +19,21 @@
 
                 });
 
-                $('button').on('click', function () {
-                    $('#jstree').jstree(true).select_node('child_node_1');
-                    $('#jstree').jstree('select_node', 'child_node_1');
-                    $.jstree.reference('#jstree').select_node('child_node_1');
+                $('#jstree').on('changed.jstree',function(e,data){
+                  var i,j,r=[];
+                  for(i=0,j=data.selected.length;i<j;i++){
+                    r.push(data.instance.get_node(data.selected[i]).id);
+                  }
+                  console.log('data',data);
+                  console.log('r',r);
+                  //console.log('data.instance.get_node(data.selected[i].id',data.instance.get_node(1));
+
+                  $('.parent_id').val(r);
+
                 });
+
+
+              
             });
         </script>
     @endpush
@@ -51,6 +56,7 @@
         <div class="form-group">
 
               {!!  Form::label('parent_id','Parent Department')!!}
+              <input type="hidden" name="parent_id" class="parent_id" value="{{old('parent_id')}}">
             <div id="jstree"></div>
 
         </div>

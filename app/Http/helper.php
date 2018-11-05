@@ -83,3 +83,36 @@ if(!function_exists('validate_image')){
        }
     }
 }
+
+if(!function_exists('load_departments')){
+    function load_departments($select=null){
+        $departments=\App\Model\Department::selectRaw('dep_name_'.lang().' as text' )
+        ->selectRaw('id as id')
+        ->selectRaw('parent_id as parent')
+        ->get(['text','id','parent']);
+       // dd(\App\Model\Department::get());
+        $dep_arr=[];
+        foreach ($departments as $department) {
+            $list_arr=[];
+            if($select!==null && $select==$department->id){
+                $list_arr['icon']='';
+                $list_arr['li_attr']='';
+                $list_arr['a_attr']='';
+                $list_arr['children']=[];
+                $list_arr['state']=[
+                            'opened'=>true,
+                            'selected'=>true,
+                ];
+
+            }
+            $list_arr['id']=$department->id;
+            $list_arr['parent']=$department->parent !==null?$department->parent:'#';
+            $list_arr['text']=$department->text;
+            array_push($dep_arr,$list_arr);
+        }
+        return json_encode($dep_arr);
+
+
+    }
+     
+}

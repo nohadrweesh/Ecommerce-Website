@@ -47,11 +47,12 @@ class DepartmentsController extends Controller
     {
         //
 
+
         $data=$this->validate($request,[
             'dep_name_ar'=>'required',
             'dep_name_en'=>'required',
             'parent_id'=>'sometimes|nullable|numeric',
-            'icon'=>'sometimes|nullable'.validate_image(),
+            'icon'=>'sometimes|nullable|'.validate_image(),
             'description'=>'sometimes|nullable',
             'keywords'=>'sometimes|nullable',
            
@@ -64,6 +65,7 @@ class DepartmentsController extends Controller
                 'Keywords'
                 
         ]);
+       // dd($data);
         if(request()->has('icon')){
             /*if(!empty(setting()->icon)){
                 Storage::delete(setting()->icon);
@@ -79,6 +81,7 @@ class DepartmentsController extends Controller
 
             ]);
         }
+
 
         Department::create($data);
         session()->flash('success','Added New Department');
@@ -116,7 +119,7 @@ class DepartmentsController extends Controller
             'dep_name_ar'=>'required',
             'dep_name_en'=>'required',
             'parent_id'=>'sometimes|nullable|numeric',
-            'icon'=>'sometimes|nullable',
+            'icon'=>'sometimes|nullable|'.validate_image(),
             'description'=>'sometimes|nullable',
             'keywords'=>'sometimes|nullable',
            
