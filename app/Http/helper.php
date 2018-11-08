@@ -85,7 +85,7 @@ if(!function_exists('validate_image')){
 }
 
 if(!function_exists('load_departments')){
-    function load_departments($select=null){
+    function load_departments($select=null,$department_id=null){
         $departments=\App\Model\Department::selectRaw('dep_name_'.lang().' as text' )
         ->selectRaw('id as id')
         ->selectRaw('parent_id as parent')
@@ -95,10 +95,7 @@ if(!function_exists('load_departments')){
         foreach ($departments as $department) {
             $list_arr=[];
             if($select!==null && $select==$department->id){
-                $list_arr['icon']='';
-                $list_arr['li_attr']='';
-                $list_arr['a_attr']='';
-                $list_arr['children']=[];
+                
                 $list_arr['state']=[
                             'opened'=>true,
                             'selected'=>true,

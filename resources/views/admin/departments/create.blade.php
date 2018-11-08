@@ -24,10 +24,7 @@
                   for(i=0,j=data.selected.length;i<j;i++){
                     r.push(data.instance.get_node(data.selected[i]).id);
                   }
-                  console.log('data',data);
-                  console.log('r',r);
-                  //console.log('data.instance.get_node(data.selected[i].id',data.instance.get_node(1));
-
+                
                   $('.parent_id').val(r);
 
                 });

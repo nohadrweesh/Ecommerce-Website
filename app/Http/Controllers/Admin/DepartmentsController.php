@@ -98,10 +98,10 @@ class DepartmentsController extends Controller
     public function edit($id)
     {
         //
-        $city=Department::findOrFail($id);
+        $department=Department::findOrFail($id);
         $title='Edit Department';
-        $country_ids=Country::pluck('country_name_'.lang(),'id');
-        return view('admin.departments.edit',compact('city','title','country_ids'));
+       
+        return view('admin.departments.edit',compact('department','title'));
     }
 
     /**
