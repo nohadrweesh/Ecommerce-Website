@@ -163,14 +163,26 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public static function delete_sub_dep($id){
+        $department=Department::where('parent_id',$id)->get();
+       // dd($department);
+        foreach ($department as $sub){
+            self::delete_sub_dep($sub->id);
+            if(!empty($sub->icon))
+                Storage::delete($sub->icon);
+            $sub->delete();
+        }
+    }
+
     public function destroy($id)
     {
         //
-        $city=City::where('id',$id);
-      
-        $city->delete();
-        session()->flash('success','City deleted successfullly');
-        return redirect(admin_url('cities'));
+        $department=Department::where('id',$id);
+        Storage::delete($department->first()->icon);
+        self::delete_sub_dep($id);
+        $department->delete();
+        session()->flash('success','Department deleted successfullly');
+        return redirect(admin_url('departments'));
     }
 
     public function multi_delete(){

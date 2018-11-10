@@ -208,11 +208,57 @@
           </a>
           <ul class="treeview-menu">
            
-            <li><a href="{{admin_url('departments')}}"><i class="fa fa-flag"></i>Departments</a></li>
+            <li><a href="{{admin_url('departments')}}"><i class="fa fa-list"></i>Departments</a></li>
             <li><a href="{{admin_url('departments/create')}}"><i class="fa fa-plus"></i>Add Department</a></li>
             
           </ul>
         </li>
+
+          <li class=" treeview">
+              <a href="#">
+                  <i class="fa fa-cubes"></i> <span>Trademarks</span>
+
+                  @if(direction()=='ltr')
+                      <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                  @else
+                      <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+              </span>
+                  @endif
+
+              </a>
+              <ul class="treeview-menu">
+
+                  <li><a href="{{admin_url('trademarks')}}"><i class="fa fa-cube"></i>Trademarks</a></li>
+                  <li><a href="{{admin_url('trademarks/create')}}"><i class="fa fa-plus"></i>Add Trademark</a></li>
+
+              </ul>
+          </li>
+
+          <li class=" treeview">
+              <a href="#">
+                  <i class="fa fa-industry"></i> <span>Manufacturers</span>
+
+                  @if(direction()=='ltr')
+                      <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                  @else
+                      <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+              </span>
+                  @endif
+
+              </a>
+              <ul class="treeview-menu">
+
+                  <li><a href="{{admin_url('manufacturers')}}"><i class="fa fa-industry"></i>Manufacturers</a></li>
+                  <li><a href="{{admin_url('manufacturers/create')}}"><i class="fa fa-plus"></i>Add Manufacturer</a></li>
+
+              </ul>
+          </li>
 
       </ul>
     </section>

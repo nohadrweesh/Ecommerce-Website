@@ -85,7 +85,7 @@ if(!function_exists('validate_image')){
 }
 
 if(!function_exists('load_departments')){
-    function load_departments($select=null,$department_id=null){
+    function load_departments($select=null,$department_hide=null){
         $departments=\App\Model\Department::selectRaw('dep_name_'.lang().' as text' )
         ->selectRaw('id as id')
         ->selectRaw('parent_id as parent')
@@ -99,6 +99,17 @@ if(!function_exists('load_departments')){
                 $list_arr['state']=[
                             'opened'=>true,
                             'selected'=>true,
+                            'disabled'=>false,
+                ];
+
+            }
+            if($department_hide!==null && $department_hide==$department->id){
+
+                $list_arr['state']=[
+                    'opened'=>false,
+                    'selected'=>false,
+                    'disabled'=>true,
+                    'hidden'=>true,
                 ];
 
             }
@@ -111,5 +122,6 @@ if(!function_exists('load_departments')){
 
 
     }
+
      
 }
